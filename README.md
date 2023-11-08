@@ -24,7 +24,7 @@ Configure `public-sync` by including a "publicSync" section in your package.json
   "privateDir": "./",
   "excludeDirs": "[[Regex expression, readable directory], ...]",
   "addExcludes": "[]",
-  "custom": "false"
+  "interactive": "false"
 }
 ```
 (Refer to the end for the full `excludeDirs` default value as it's lengthy.)
@@ -33,7 +33,7 @@ Configure `public-sync` by including a "publicSync" section in your package.json
 - `privateDir`: Source directory for copying files.
 - `excludeDirs`: Array of directory patterns to exclude.
 - `addExcludes`: Additional exclusions that can be used in combination with `excludeDirs`.
-- `custom`: When true, enables advanced configuration options (see "Example 4").
+- `interactive`: When true, enables advanced interactive configuration options (see "Example 4").
 
 ## Usage
 
@@ -83,9 +83,9 @@ Change the source and destination directories in package.json:
 
 Now, `public-sync` copies files from `./new_private` to `./new_public`.
 
-### Example 4: Using the Custom Feature
+### Example 4: Using the interactive features
 
-The `custom` feature provides advanced flexibility:
+The `interactive` config option provides advanced flexibility:
 
 Use Flags:
 - `-f` to make the public directory the same as the private directory.
