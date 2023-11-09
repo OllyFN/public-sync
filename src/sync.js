@@ -7,7 +7,7 @@ import interactiveCopy from './interactive/interactiveCopy.js';
 const config = loadConfig();
 
 try {
-  createDirs(config);
+  await createDirs(config);
   if (config && config.interactive) {
     await interactiveCopy(config)
   }else {

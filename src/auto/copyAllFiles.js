@@ -19,13 +19,17 @@ export default (config) => {
 
   // Remove the destination directory before copying
   fs.removeSync(config.publicDir);
+  fs.mkdirSync(config.publicDir, {recursive: true});
   
   try {
     console.log(chalk.yellow('Starting to copy files...'));
+    const publicDirName = path.basename(config.publicDir);
+    const privateDirPath = path.dirname(config.privateDir);
+    console.log(privateDirPath)
     fs.readdirSync(config.privateDir).forEach(dir => {
       const dirPath = path.join(config.privateDir, dir);
       // Skip if the current dir is the destination directory
-      if (dir === dirPath) {
+      if (dir === publicDirName) {
         return;
       }
       if (!DEFAULT_EXCLUDE.some(excludedDir => excludedDir.test(dirPath))) {
