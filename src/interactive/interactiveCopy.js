@@ -5,7 +5,6 @@ import clear from 'clear';
 import path from 'path';
 import askExcludeDirs from './askExcludeDirs.js';
 import askDirectory from './askDirectory.js';
-import validateDirectory from './validateDirectory.js';
 
 const readline = rl.createInterface({
   input: process.stdin,
@@ -15,12 +14,10 @@ const readline = rl.createInterface({
 const directoryConfirmed = (dirPrefix, dir) =>
   console.log(chalk.green('Directory confirmed: ' + path.resolve(dirPrefix, dir).replace(/\\/g, '/')));
 
-
-
 export default async (config) => {
   const DEFAULT_EXCLUDE = config.excludeDirs.map(item => [new RegExp(item[0]), item[1]]);
-  const PUBLIC_DIR = config.publicDir;
-  const PRIVATE_DIR = config.privateDir;
+  const PUBLIC_DIR = config.publicDir[-1]=='/' ? config.publicDir : config.publicDir+'/';
+  const PRIVATE_DIR = config.privateDir[-1]=='/' ? config.privateDir : config.privateDir+'/';
   const askPublic = 'Enter public directory: (will be created if doesnt exist)'
   const askPrivate = 'Enter private directory:'
   clear();
@@ -47,9 +44,8 @@ export default async (config) => {
   chalk.yellow('(o) to replace the directory completely\n') +
   chalk.gray('(you can add -y, -n, -o flags to skip input validation with coresponding flag as input.)\n')
   let errQuestion=chalk.red('Public directory: ' + path.resolve(PUBLIC_DIR, publicDir).replace(/\\/g, '/') + ' already exists.\n') + errOverrideQuestion;
-
   while (!validDir) {
-    if (!flags.includes('-s') && !validateDirectory(PUBLIC_DIR, publicDir)) {
+    if (!flags.includes('-s') && (fs.existsSync(PUBLIC_DIR + publicDir))) {
       let response;
       if (flags.includes('-y')) {
         response='y'
