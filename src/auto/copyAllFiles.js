@@ -1,11 +1,10 @@
 import fs from 'fs-extra';
 import path from 'path';
 import chalk from 'chalk';
-import createRegex from '../utils/createRegex.js';
 
-export default (config, excludeDirs) => {
+export default (config) => {
   const copiedFiles = [];
-  const DEFAULT_EXCLUDE = config.excludeDirs.map(item => createRegex(item[0]));
+  const DEFAULT_EXCLUDE = config.excludeDirs.map(item => new RegExp(item[0]));
 
   let logFn;
   if (config.debug.showCopied && config.debug.showNotCopied) {

@@ -6,7 +6,6 @@ import path from 'path';
 import askExcludeDirs from './askExcludeDirs.js';
 import askDirectory from './askDirectory.js';
 import validateDirectory from './validateDirectory.js';
-import createRegex from '../utils/createRegex.js';
 
 const readline = rl.createInterface({
   input: process.stdin,
@@ -19,7 +18,7 @@ const directoryConfirmed = (dirPrefix, dir) =>
 
 
 export default async (config) => {
-  const DEFAULT_EXCLUDE = config.excludeDirs.map(item => [createRegex(item[0]), item[1]]);
+  const DEFAULT_EXCLUDE = config.excludeDirs.map(item => [new RegExp(item[0]), item[1]]);
   const PUBLIC_DIR = config.publicDir;
   const PRIVATE_DIR = config.privateDir;
   const askPublic = 'Enter public directory: (will be created if doesnt exist)'
@@ -50,7 +49,7 @@ export default async (config) => {
   let errQuestion=chalk.red('Public directory: ' + path.resolve(PUBLIC_DIR, publicDir).replace(/\\/g, '/') + ' already exists.\n') + errOverrideQuestion;
 
   while (!validDir) {
-    if (!flags.includes('-s') && validateDirectory(PUBLIC_DIR, publicDir)) {
+    if (!flags.includes('-s') && !validateDirectory(PUBLIC_DIR, publicDir)) {
       let response;
       if (flags.includes('-y')) {
         response='y'
@@ -109,8 +108,7 @@ export default async (config) => {
   fs.readdirSync(sourceDir).forEach(item => {
     const itemPath = path.join(sourceDir, item);
     // Skip if the current item is the destination directory
-    
-    if (item === itemPath) {
+    if (item === destDir.slice(0, -1)) {
       return;
     }
     if (!excludeDirs.some(excludedDir => excludedDir.test(itemPath))) {

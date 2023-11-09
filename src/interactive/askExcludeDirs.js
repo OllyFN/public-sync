@@ -1,4 +1,3 @@
-import createRegex from "../utils/createRegex.js";
 import chalk from 'chalk';
 
 
@@ -6,7 +5,7 @@ const addDirToExclusions = (dir, dirs) => {
   if (dir && dir.trim() !== '-f') {
     console.log(dir)
     try {
-      dirs.push(createRegex(dir));
+      dirs.push(new RegExp(dir));
     } catch (error) {
       console.error(chalk.red('Invalid regular expression: ' + dir));
       return false;
@@ -35,7 +34,7 @@ export default async (flags, readline) => {
 
     if (dir && dir.trim() !== '-f') {
       try {
-        dirs.push(createRegex(dir));
+        dirs.push(new RegExp(dir));
       } catch (error) {
         console.error(chalk.red('Invalid regular expression: ' + dir));
       }

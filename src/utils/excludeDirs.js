@@ -1,6 +1,6 @@
 export default [
-  ["/*node_modules/", "node_modules/"],
-  ["/*.git/", ".git/"],
+  ["/*node_modules/*", "node_modules/"],
+  ["/*.git/*", ".git/"],
   ["/*.env", ".env"],
   ["/*.json", ".json"],
   ["/*.npmrc", ".npmrc"],

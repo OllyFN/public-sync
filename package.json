@@ -1,6 +1,6 @@
 {
   "name": "public-sync",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A tool to sync files from a private directory to a public directory",
   "main": "./src/sync.js",
   "type": "module",
@@ -26,15 +26,7 @@
     "testMatch": [
       "**/__tests__/**/*.js?(x)",
       "**/?(*.)+(spec|test).js?(x)"
-    ],
-    "collectCoverage": true,
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "clover"
-    ],
-    "coverageDirectory": "<rootDir>/coverage/"
+    ]
   },
   "babel": {
     "presets": [

@@ -16,15 +16,15 @@ Configure `public-sync` by including a "publicSync" section in your package.json
 
 ```json
 "publicSync": {
-  "debug": {
-    "showCopied": true,
+    "debug": {
+    "showCopied": false,
     "showNotCopied": false
   },
   "publicDir": "./publicSync/",
   "privateDir": "./",
   "excludeDirs": "[[Regex expression, readable directory], ...]",
-  "addExcludes": "[]",
-  "interactive": "false"
+  "addExcludes": [],
+  "interactive": false
 }
 ```
 (Refer to the end for the full `excludeDirs` default value as it's lengthy.)

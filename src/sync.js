@@ -4,20 +4,14 @@ import loadConfig from './config.js';
 import copyAllFiles from './auto/copyAllFiles.js';
 import createDirs from './utils/createDirs.js';
 import interactiveCopy from './interactive/interactiveCopy.js';
-import createRegex from './utils/createRegex.js';
 const config = loadConfig();
-
-const REGEX_EXCLUDE = 
-  config.addExcludes.length==0 ?
-  config.excludeDirs.map(item => createRegex(item[0])) :
-  [...config.excludeDirs.map(item => createRegex(item[0])),...config.addExcludes.map(item => createRegex(item[0]))];
 
 try {
   createDirs(config);
   if (config && config.interactive) {
-    await interactiveCopy(config, REGEX_EXCLUDE)
+    await interactiveCopy(config)
   }else {
-    copyAllFiles(config, REGEX_EXCLUDE);
+    copyAllFiles(config);
   }
   console.log(chalk.green('Files copied successfully. ✅'));
   process.exit()
