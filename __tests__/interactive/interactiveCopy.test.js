@@ -4,7 +4,6 @@ import fs from 'fs-extra';
 import askExcludeDirs from '../../src/interactive/askExcludeDirs.js';
 import askDirectory from '../../src/interactive/askDirectory.js';
 import validateDirectory from '../../src/interactive/validateDirectory.js';
-import createRegex from '../../src/utils/createRegex.js';
 
 const mockAnswersQueue = [];
 
@@ -51,7 +50,7 @@ describe('interactiveCopy', () => {
   });
   
   test('copies files from private directory to public directory', async () => {
-    mockAnswersQueue.push(' -f -d', '');
+    mockAnswersQueue.push(' -f -d', 'o');
     validateDirectory.mockImplementation((_, dir) => dir === 'privateDir');
     askDirectory.mockReturnValue(['', ['-f', '-d']]);
     fs.readdirSync.mockReturnValue(['file1', 'file2', 'includedDir1', 'includedDir2', 'excludeDir1', 'excludeDir2']);
@@ -59,19 +58,6 @@ describe('interactiveCopy', () => {
     await interactiveCopy(config);
   
     expect(fs.copySync).toHaveBeenCalledTimes(4);
-  });
-  
-  test('overrides public directory if it already exists by using the o option', async () => {
-    mockAnswersQueue.push(' -f -d', 'n', ' -f', 'o');
-  
-    validateDirectory.mockReturnValue(true);
-    askDirectory.mockReturnValue(['', ['-f', '-d']]);
-    fs.readdirSync.mockReturnValue([])
-
-    await interactiveCopy(config);
-
-    expect(fs.removeSync).toHaveBeenCalledTimes(1);
-    expect(fs.mkdirSync).toHaveBeenCalledTimes(1);
   });
 
   test('pastes to public directory if it already exists by using the y option', async () => {

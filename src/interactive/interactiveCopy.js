@@ -23,13 +23,13 @@ export default async (config) => {
   const PRIVATE_DIR = config.privateDir;
   const askPublic = 'Enter public directory: (will be created if doesnt exist)'
   const askPrivate = 'Enter private directory:'
-  clear();
-  console.log(chalk.green('Welcome to the Private to Public Sync tool. 🚀'))
-  console.log(chalk.yellow('DEFAULT FILES TO EXCLUDE: '), chalk.red(DEFAULT_EXCLUDE.map(item => item[1]).join(', ')));
-  console.log(chalk.cyan('-f flag to have the same public directory as the private directory.'))
-  console.log(chalk.cyan('-s flag to skip existing public directory warning.'))
-  console.log(chalk.cyan('-x flag to override default directories to exclude.'))
-  console.log(chalk.cyan('-d flag to skip setting directories to exclude & use default.'))
+  // clear();
+  // console.log(chalk.green('Welcome to the Private to Public Sync tool. 🚀'))
+  // console.log(chalk.yellow('DEFAULT FILES TO EXCLUDE: '), chalk.red(DEFAULT_EXCLUDE.map(item => item[1]).join(', ')));
+  // console.log(chalk.cyan('-f flag to have the same public directory as the private directory.'))
+  // console.log(chalk.cyan('-s flag to skip existing public directory warning.'))
+  // console.log(chalk.cyan('-x flag to override default directories to exclude.'))
+  // console.log(chalk.cyan('-d flag to skip setting directories to exclude & use default.'))
 
   let [privateDir, flags] = await askDirectory(askPrivate, PRIVATE_DIR, readline, true);
   directoryConfirmed(config.privateDir, privateDir)
