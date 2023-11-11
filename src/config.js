@@ -11,6 +11,7 @@ const defaultConfig = {
   publicDir: "./publicSync/",
   privateDir: "./",
   excludeDirs: excludeDirs,
+  overrideExceptions: [],
   addExcludes: [],
   interactive: false,
   override: true,

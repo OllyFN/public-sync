@@ -5,6 +5,9 @@ import chalk from "chalk";
 export default (config) => {
   const copiedFiles = [];
   const DEFAULT_EXCLUDE = config.excludeDirs.map((item) => new RegExp(item[0]));
+  const OVERRIDE_EXCEPTIONS = config.overrideExceptions.map(
+    (item) => new RegExp(item)
+  );
 
   let logFn;
   if (config.debug.showCopied && config.debug.showNotCopied) {
@@ -22,10 +25,45 @@ export default (config) => {
     logFn = () => {};
   }
 
+  function removeUnmatchedFiles(dir) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+    // If the directory itself matches any regex, return true immediately
+    if (
+      OVERRIDE_EXCEPTIONS.some((pattern) => pattern.test(path.basename(dir)))
+    ) {
+      return true;
+    }
+
+    let hasMatch = false;
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        if (removeUnmatchedFiles(fullPath)) {
+          hasMatch = true;
+        } else {
+          fs.removeSync(fullPath);
+        }
+      } else if (entry.isFile()) {
+        if (OVERRIDE_EXCEPTIONS.some((pattern) => pattern.test(entry.name))) {
+          hasMatch = true;
+        } else {
+          fs.removeSync(fullPath);
+        }
+      }
+    }
+
+    return hasMatch;
+  }
+
   // Remove the destination directory before copying
   if (config.override) {
-    fs.removeSync(config.publicDir);
-    fs.mkdirSync(config.publicDir, { recursive: true });
+    if (OVERRIDE_EXCEPTIONS.length > 0) {
+      removeUnmatchedFiles(config.publicDir);
+    } else {
+      fs.removeSync(config.publicDir);
+      fs.mkdirSync(config.publicDir, { recursive: true });
+    }
   }
 
   try {
