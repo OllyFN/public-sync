@@ -76,9 +76,6 @@ By default, `public-sync` copies all files from `./` to `./publicSync`, excludin
 }
 ```
 
-GitHub Copilot: I apologize for the oversight. Here's the revised version of Use Case 2 and 3:
-
-````markdown
 ### Use Case 2: Directory Modification and Interactive Features 📁
 
 You can change the source and destination directories. The `interactive` option provides advanced flexibility with flags like `-f` (finish), `-s` (skip warnings), `-x` (customize exclusions), and `-d` (use default exclusions):
@@ -90,7 +87,6 @@ You can change the source and destination directories. The `interactive` option 
   "interactive": true
 }
 ```
-````
 
 Then, run the synchronization with interactive flags:
 
