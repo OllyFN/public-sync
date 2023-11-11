@@ -2,7 +2,6 @@ export default [
   ["/*node_modules/*", "node_modules/"],
   ["/*.git/*", ".git/"],
   ["/*.env", ".env"],
-  ["/*.json", ".json"],
   ["/*.npmrc", ".npmrc"],
   ["/*.dockerenv", ".dockerenv"],
   ["/*Dockerfile", "Dockerfile"],
@@ -69,5 +68,5 @@ export default [
   ["/*.gitlab-ci.yml", ".gitlab-ci.yml"],
   ["/*.travis.yml", ".travis.yml"],
   ["/*.circleci/*", ".circleci/"],
-  ["/*.github/*", ".github/"]
-]
+  ["/*.github/*", ".github/"],
+];
