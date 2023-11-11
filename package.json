@@ -1,6 +1,6 @@
 {
   "name": "public-sync",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A tool to sync files from a private directory to a public directory",
   "main": "./src/sync.js",
   "type": "module",
