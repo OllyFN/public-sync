@@ -14,8 +14,7 @@ I encourage you to submit pull requests for bug fixes, enhancements, or the addi
 2. Create a new branch for your changes.
 3. Make your desired modifications.
 4. Write **clear and concise** commit messages.
-5. Ensure your code adheres to the existing code style and passes all tests.
-6. Open a **pull request** with a descriptive title and a detailed explanation of your changes.
+5. Open a **pull request** with a descriptive title and a detailed explanation of your changes.
 
 Certainly, here's the revised section with a mention of the code style:
 
@@ -29,7 +28,7 @@ Your willingness to refactor and improve the code style is greatly appreciated.
 
 ## Testing
 
-If your contribution introduces new features or modifies existing ones, it's crucial to include appropriate tests. However, please note that our current Jest tests and regex detection may not be optimal. I encourage contributors to consider refactoring and improving these aspects. Any assistance in making our tests more robust or enhancing regex detection would be highly appreciated.
+As of the current state of this repository, the Tests are in a very bad place, I just recently started to learn Jest so running your tests to make sure your code works in this repo is futile, if anyone is interested in writing the tests it would be much appreciated, there are some test files there already but they're my poor attempts which can be deleted.
 
 ## Documentation
 
