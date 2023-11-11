@@ -46,7 +46,8 @@ Configure `public-sync` by including a "publicSync" section in your package.json
 
 - `/folder$/` - Targets a specific folder. Example: `/.git$/` to target `.git` folders.
 - `/file.txt/` - Targets a specific file. Example: `/apiKeys.txt/` to target a file named `apiKeys.txt`.
-- `/*.ext` - Targets all files with a specific extension. Example: `/*.env` to target all `.env` files.
+- `/*.ext$` - Targets all files with a specific extension. Example: `/*.env$` to target all `.env` files.
+- `/*.ext` - Targets all files with a specific extension start. Example: `/*.env` to target `.env.production` or `.env.development` & `.env`
 - `/*phrase*` - Targets all files with a phrase in the name. Example: `/*.config.*` to target files like `jest.config.js` or `webpack.config.js`
 
 ## Usage 🚀
