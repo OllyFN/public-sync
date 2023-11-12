@@ -45,7 +45,7 @@
     "file-management"
   ],
   "author": "OllyFN",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
     "clear": "^0.1.0",
