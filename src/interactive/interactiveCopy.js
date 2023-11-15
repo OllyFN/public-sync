@@ -30,15 +30,27 @@ export default async (config) => {
   const askPublic = "Enter public directory: (will be created if doesnt exist)";
   const askPrivate = "Enter private directory:";
   clear();
-  // console.log(chalk.green('Welcome to the Private to Public Sync tool. 🚀'))
-  // console.log(chalk.yellow('DEFAULT FILES TO EXCLUDE: '), chalk.red(DEFAULT_EXCLUDE.map(item => item[1]).join(', ')));
-  // console.log(chalk.cyan('-f flag to have the same public directory as the private directory.'))
-  // console.log(chalk.cyan('-s flag to skip existing public directory warning.'))
-  // console.log(chalk.cyan('-x flag to override default directories to exclude.'))
-  // console.log(chalk.cyan('-d flag to skip setting directories to exclude & use default.'))
+  console.log(chalk.green("Welcome to the Private to Public Sync tool. 🚀"));
+  console.log(
+    chalk.yellow("DEFAULT FILES TO EXCLUDE: "),
+    chalk.red(DEFAULT_EXCLUDE.map((item) => item[1]).join(", "))
+  );
+  console.log(
+    chalk.cyan(
+      "-f flag to have the same public directory as the private directory."
+    )
+  );
+  console.log(chalk.cyan("-s flag to skip existing public directory warning."));
+  console.log(
+    chalk.cyan("-x flag to override default directories to exclude.")
+  );
+  console.log(
+    chalk.cyan("-d flag to skip setting directories to exclude & use default.")
+  );
 
   // Added code to accept an optional parameter in config (default = false) allDifferent
   let allDifferent = config.allDifferent || false; // Get the value of allDifferent from config or set it to false if undefined
+  console.log(chalk.red("allDifferent: " + allDifferent)); // Show the value of allDifferent
   let multipleDirs = false; // A variable to store whether the user wants multiple directories or not
   let numDirs = 1; // A variable to store the number of directories to add
   if (!allDifferent) {
@@ -235,34 +247,36 @@ export default async (config) => {
     });
 
     // If allDifferent is false and there are multiple directories, ask the user if they want to repeat
-  // the same action for the remaining directories or not
-  if (!allDifferent && multipleDirs && i < numDirs - 1) {
-    let response = await new Promise((resolve) =>
-      readline.question(
-        chalk.cyan(
-          "Do you want to repeat the same action for the remaining directories?\n"
-        ) +
-          chalk.green("(y) to repeat the same action\n") +
-          chalk.red("(n) to enter different action for each directory\n") +
-          chalk.gray(
-            "(you can add -y or -n flags to skip input validation with coresponding flag as input.)\n"
-          ),
-        resolve
-      )
-    );
-    if (response === "y" || response === "-y") {
-      // If the user wants to repeat the same action, break the loop and copy the remaining directories
-      // with the same source and destination names and the same excludeDirs
-      break;
-    } else if (response === "n" || response === "-n") {
-      // If the user does not want to repeat the same action, continue the loop and ask for the next directory
-      continue;
-    } else {
-      // If the user enters an invalid response, show a warning message and continue the loop
-      console.log(chalk.red("Invalid response. Continuing to the next directory."));
-      continue;
+    // the same action for the remaining directories or not
+    if (!allDifferent && multipleDirs && i < numDirs - 1) {
+      let response = await new Promise((resolve) =>
+        readline.question(
+          chalk.cyan(
+            "Do you want to repeat the same action for the remaining directories?\n"
+          ) +
+            chalk.green("(y) to repeat the same action\n") +
+            chalk.red("(n) to enter different action for each directory\n") +
+            chalk.gray(
+              "(you can add -y or -n flags to skip input validation with coresponding flag as input.)\n"
+            ),
+          resolve
+        )
+      );
+      if (response === "y" || response === "-y") {
+        // If the user wants to repeat the same action, break the loop and copy the remaining directories
+        // with the same source and destination names and the same excludeDirs
+        break;
+      } else if (response === "n" || response === "-n") {
+        // If the user does not want to repeat the same action, continue the loop and ask for the next directory
+        continue;
+      } else {
+        // If the user enters an invalid response, show a warning message and continue the loop
+        console.log(
+          chalk.red("Invalid response. Continuing to the next directory.")
+        );
+        continue;
+      }
     }
   }
-  }
   readline.close();
-}
+};
